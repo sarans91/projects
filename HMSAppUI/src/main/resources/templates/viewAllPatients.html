@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>View All Patients</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            margin: 20px auto;
+            max-width: 90%;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #007bff; /* Blue color for heading */
+            margin-bottom: 20px;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .table th, .table td {
+            text-align: left;
+            padding: 12px;
+            border: 1px solid #dee2e6;
+        }
+
+        .table th {
+            background-color: rgb(0, 128, 255);
+            color: rgb(255, 255, 255); /* Blue color for table headers */
+            font-weight: bold;
+        }
+
+        .table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .table tr:hover {
+            background-color: #e9ecef;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #ffffff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 4px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>All Patients</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Patient ID</th>
+                    <th>Name</th>
+                    <th>Contact Number</th>
+                    <th>Date of Birth</th>
+                    <th>Gender</th>
+                    <th>Email</th>
+                    <th>Location</th>
+                    <th>Allergies</th>
+                    <th>Medications</th>
+                    <th>Treatments</th>
+                    <th>Medical History</th>
+                    <th>Others</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="patient : ${patients}">
+                    <td th:text="${patient.patientId}"></td>
+                    <td th:text="${patient.patientName}"></td>
+                    <td th:text="${patient.contactNumber}"></td>
+                    <td th:text="${patient.dateOfBirth}"></td>
+                    <td th:text="${patient.gender}"></td>
+                    <td th:text="${patient.emailId}"></td>
+                    <td th:text="${patient.location}"></td>
+                    <td th:text="${patient.allergies}"></td>
+                    <td th:text="${patient.medications}"></td>
+                    <td th:text="${patient.treatments}"></td>
+                    <td th:text="${patient.medicalHistory}"></td>
+                    <td th:text="${patient.others}"></td>
+                    <td th:text="${patient.status}"></td>
+                </tr>
+            </tbody>
+        </table>
+        <a href="/admin/patientinfo" class="btn">Back to Home</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>View Appointments</title>
+    <!-- Add Bootstrap for styling -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            margin-top: 50px;
+            max-width: 500px;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        button {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>View Appointments</h2>
+        <form th:action="@{/viewDoctorAppointments}" method="post">
+            <div class="form-group">
+                <label for="doctorId">Doctor ID:</label>
+                <input type="text" id="doctorId" name="doctorId" class="form-control" placeholder="Enter Doctor ID" >
+            </div>
+            <div class="form-group">
+                <label for="startDate">Start Date:</label>
+                <input type="date" id="startDate" name="startDate" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="endDate">End Date:</label>
+                <input type="date" id="endDate" name="endDate" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+		<div th:if="${errorMessage}" style="color: red;">
+									       <p th:text="${errorMessage}"></p>
+									   </div>
+									   <div class="col-sm-4">
+									   					<a href="/admin/appointmentinfo" >Back to Home</a>
+									   			    </div>
+    </div>
+    <!-- Add Bootstrap JS for interactivity -->
+   
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+

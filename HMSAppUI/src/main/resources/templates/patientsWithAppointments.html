@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Today's Appointments</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding: 40px;
+            background-color: #f8f9fa;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #343a40;
+        }
+        .table th {
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+        }
+        .table td {
+            text-align: center;
+        }
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Patients with Appointments Today</h1>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Patient ID</th>
+                    <th>Patient Name</th>
+                    <th>Gender</th>
+                    <th>Location</th>
+                    <th>Email ID</th>
+                    <th>Contact Number</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="patient : ${patients}">
+                    <td th:text="${patient.patientId}"></td>
+                    <td th:text="${patient.patientName}"></td>
+                    <td th:text="${patient.gender}"></td>
+                    <td th:text="${patient.location}"></td>
+                    <td th:text="${patient.emailId}"></td>
+                    <td th:text="${patient.contactNumber}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div class="btn-container">
+        <a th:href="@{/viewAllAppointments}" class="btn btn-primary">View All Appointments</a>
+        <a href="/admin/appointmentinfo" class="btn btn-secondary">Back to Home</a>
+    </div>
+</div>
+
+<!-- Bootstrap JS Bundle -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

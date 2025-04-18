@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Appointments</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #e9ecef;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+        }
+        h1 {
+            text-align: center;
+            color: #495057;
+            margin-bottom: 30px;
+        }
+        table {
+            width: 90%;
+            max-width: 900px;
+            margin: 0 auto;
+            border-collapse: collapse;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #dee2e6;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+            font-weight: bold;
+        }
+        td {
+            background-color: #f8f9fa;
+        }
+        tr:hover {
+            background-color: #f1f3f5;
+        }
+        .error-message {
+            text-align: center;
+            color: #dc3545;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>All Appointments</h1>
+        <div th:if="${appointments}">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Appointment ID</th>
+                        <th>Doctor</th>
+                        <th>Patient</th>
+                        <th>Date</th>
+						<th>Start Time</th>
+						<th>End Time</th>
+						<th>Status</th>
+						
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="appointment : ${appointments}">
+                        <td th:text="${appointment.appointmentId}"></td>
+                        <td th:text="${appointment.doctorObj.doctorName}"></td>
+                        <td th:text="${appointment.patientObj.patientName}"></td>
+                        <td th:text="${appointment.appointmentDate}"></td>
+						<td th:text="${appointment.startTime}"></td>
+						<td th:text="${appointment.endTime}"></td>
+						<td th:text="${appointment.status}"></td>
+						
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+		<div style="padding-left: 30px;">
+			<a href="/admin/appointmentinfo" class="btn btn-secondary mt-3">Back to Home</a>
+		</div>
+        <div th:if="${errorMessage}" class="error-message">
+            <p th:text="${errorMessage}"></p>
+        </div>
+    </div>
+</body>
+</html>

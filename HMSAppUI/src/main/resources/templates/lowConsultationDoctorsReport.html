@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Low Consultation Doctor Report</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            font-size: 2em;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        label {
+            font-size: 1em;
+            color: #333;
+        }
+
+        input[type="date"] {
+            padding: 8px;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .error {
+            color: #ff4d4d;
+            background-color: #f8d7da;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        table th, table td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #007BFF;
+            color: white;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        table tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        table td {
+            border-top: 1px solid #ddd;
+        }
+
+        /* Media Queries for Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 1.5em;
+            }
+
+            form {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            label {
+                font-size: 0.9em;
+            }
+
+            input[type="date"] {
+                padding: 10px;
+                font-size: 1.1em;
+            }
+
+            button {
+                padding: 12px;
+                font-size: 1.1em;
+            }
+
+            table th, table td {
+                font-size: 0.9em;
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.2em;
+            }
+
+            form {
+                gap: 10px;
+            }
+
+            button {
+                padding: 10px;
+                font-size: 1em;
+            }
+
+            table th, table td {
+                font-size: 0.8em;
+                padding: 8px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Low Consultation Doctor Report</h1>
+        <form th:action="@{/lowConsultationDoctorsReport}" method="get">
+            <div>
+                <label for="startDate">Start Date:</label>
+                <input type="date" id="startDate" name="startDate" th:value="${startDate}" >
+            </div>
+            <div>
+                <label for="endDate">End Date:</label>
+                <input type="date" id="endDate" name="endDate" th:value="${endDate}" >
+            </div>
+            <button type="submit">Generate Report</button>
+        </form>
+        
+        <!-- Show error message if exists -->
+        <div th:if="${errorMessage}" class="error">
+            <p th:text="${errorMessage}"></p>
+        </div>
+        
+        <!-- Display the report if doctors exist -->
+        <div th:if="${doctors}">
+            <h2>Report Results</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Doctor ID</th>
+                        <th>Doctor Name</th>
+                        <th>Specialization</th>
+                        <th>Consultations</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="doctor : ${doctors}">
+                        <td th:text="${doctor.doctorId}"></td>
+                        <td th:text="${doctor.doctorName}"></td>
+                        <td th:text="${doctor.specialization}"></td>
+                        <td th:text="${doctor.consultationFees}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+	<a href="/admin/appointmentinfo" class="btn btn-secondary mt-3">Back to Home</a><br><br>
+	<a th:href = "@{/viewAllAppointments}">View all appointments</a>
+</body>
+</html>
